@@ -1,0 +1,31 @@
+{
+  "name": "api-rest-nodejs",
+  "version": "1.0.0",
+  "description": "ejemplo de api rest utilizando nodejs ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luchoingeniero/api-rest-nodejs.git"
+  },
+  "keywords": [
+    "nodejs",
+    "jwt"
+  ],
+  "author": "Luis Alberto Galeano Montalvo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luchoingeniero/api-rest-nodejs/issues"
+  },
+  "homepage": "https://github.com/luchoingeniero/api-rest-nodejs#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.9.1",
+    "mysql": "^2.17.1"
+  }
+}
