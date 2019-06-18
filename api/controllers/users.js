@@ -1,35 +1,35 @@
 'use strict'
-const peoplesService=require('../services/peoples');
+const usersService=require('../services/users');
 module.exports={
 
     listAll: async (req,res)=>{
-       res.send( await peoplesService.listAll() ) ;
+       res.send( await usersService.listAll() ) ;
     },
     add:async (req,res)=>{
-        if(!req.body.people){
+        if(!req.body.user){
             res.status(400).end();
         }else{
-            res.send( await peoplesService.add(req.body.people) ) ;
+            res.send( await usersService.add(req.body.user) ) ;
         }
        
     },
     update:async (req,res)=>{
-        if(!req.body.people||!req.body.people.id){
+        if(!req.body.user||!req.body.user.id){
             res.status(400).end();
         }else{
-        res.send( await peoplesService.update(req.body.people) ) ;
+        res.send( await usersService.update(req.body.user) ) ;
         }
     },
     delete: async(req,res)=>{
         if(!req.params.id){
             res.status(400).end();
         }
-        var people=await peoplesService.findById(req.params.id);
-        if(!people.id){
+        var user=await usersService.findById(req.params.id);
+        if(!user.id){
             res.status(400).send({"error":"Registro No Encontrado!"});
         }else{
-            var deleted= await peoplesService.delete(people);
-            var output=(deleted.affectedRows&&deleted.affectedRows>0)?people:deleted;
+            var deleted= await usersService.delete(user);
+            var output=(deleted.affectedRows&&deleted.affectedRows>0)?user:deleted;
         res.send( output) ;
         }
     },
@@ -37,7 +37,7 @@ module.exports={
         if(!req.params.id){
             res.status(400).end();
         }else{
-        res.send(await peoplesService.findById(req.params.id)) ; 
+        res.send(await usersService.findById(req.params.id)) ; 
         }
     },
   

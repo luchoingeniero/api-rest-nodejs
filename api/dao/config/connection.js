@@ -39,7 +39,11 @@ var conn={
     findOneByColumnTable:(table,column,value)=>{
       return new Promise((resolve, reject) => {
          conn.query("select * from "+table+" where "+column+"=?",[value])
-         .then((data)=>{resolve(data[0])})
+         .then((data)=>{ 
+            console.log("DATA",data);
+            resolve(data[0]?data[0]:{});
+         
+         })
          .catch(reject);
       });
     },
@@ -60,33 +64,36 @@ var conn={
       return conn.query("select * from "+table+" where "+column+"like '%?%'",[value]);
     },
     deleteByColumn:(table,column,value)=>{
-      const sql="delete * from "+table+" where "+column+"=?;";
+      const sql="delete  from "+table+" where "+column+"=?;";
       return  new Promise((resolve, reject) => {
           conn.query(sql,[value])
           .then((data)=>{resolve(data)})
-          .catch(reject);
+          .catch(resolve);
       });
     },
     createByObject:(table,object)=>{
       var objData=objectToData(object);
       var sql="insert into "+table+" ("+objData.columns.join()+") values("+objData.params.join()+")";
+      console.log(sql);
       return  new Promise((resolve, reject) => {
                   conn.query(sql,objData.data)
-                  .then((data)=>{resolve(data[0])})
-                  .catch(reject);
+                  .then((data)=>{object.id=data.insertId;  resolve(object)})
+                  .catch(resolve);
                });
 
     },
-    updateByIdObject:(table,object)=>{
+    updateByObject:(table,object)=>{
       var id=object.id;
       delete  object.id;
       var objData=objectToData(object,"_UPDATE");
       var sql="update "+table+" set "+objData.columns.join()+" where id=? ";
+      console.log(sql);
       objData.data.push(id);
+      object.id=id;
       return  new Promise((resolve, reject) => {
                   conn.query(sql,objData.data)
-                  .then((data)=>{resolve(data[0])})
-                  .catch(reject);
+                  .then((data)=>{resolve(object)})
+                  .catch(resolve);
                });
     },
     query:(query,data=[])=>{

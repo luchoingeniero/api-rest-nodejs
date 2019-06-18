@@ -8,6 +8,6 @@ module.exports={
     findAllByContainsName:(name)=>{return connection.findAllByContainsColumnTable(table,"names",name); },
     delete:(people)=>{return connection.deleteByColumn(table,"id",people.id);},
     add:(people)=>{return connection.createByObject(table,people);},
-    update:(people)=>{ return connection.createByObject(table,people);  }
+    update:(people)=>{ return connection.updateByObject(table,people);  }
 
 };

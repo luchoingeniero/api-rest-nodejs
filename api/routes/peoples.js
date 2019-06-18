@@ -4,10 +4,10 @@ const peoplesController=require('../controllers/peoples');
 
 router.route('/')
     .get(peoplesController.listAll)
-    .post(peoplesController.add);
+    .post(peoplesController.add)
+    .put(peoplesController.update);
 
 router.route('/:id')
-      .put(peoplesController.update)
       .delete(peoplesController.delete)
       .get(peoplesController.findById);
 
