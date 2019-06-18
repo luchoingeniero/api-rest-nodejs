@@ -1,6 +1,18 @@
 'use strict'
 const usersService=require('../services/users');
+const util=require('../util/util');
 module.exports={
+
+    login:async (req,res)=>{
+        var {user}=req.body;
+          if(!user||!user.username||!user.password){
+            res.status(400).end();
+        }else{
+            var isLogin= await usersService.login(user);
+            var tokenData = {username: user.username};
+            res.send( (isLogin)?{token:util.generateTocken(tokenData)}:{error: 'usuario o contraseña inválidos'});
+        }
+     },
 
     listAll: async (req,res)=>{
        res.send( await usersService.listAll() ) ;
@@ -9,7 +21,7 @@ module.exports={
         if(!req.body.user){
             res.status(400).end();
         }else{
-            res.send( await usersService.add(req.body.user) ) ;
+           res.send( await usersService.add(req.body.user) ) ;
         }
        
     },
@@ -40,6 +52,20 @@ module.exports={
         res.send(await usersService.findById(req.params.id)) ; 
         }
     },
+    addDefault: async ()=>{
+        var user={
+            username:'lgaleano',
+            password:'1234',
+            role:"ROLE_ADMIN"
+        }
+        var user_db = await usersService.findByUsername(user.username);
+        
+        if(user_db.id){ 
+            
+            return {'info':'Usuario Default ya existe'};
+        }
+        return await usersService.add(user);
+    }
   
 
 };
