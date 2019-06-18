@@ -8,7 +8,8 @@ app.use(morgan('dev'));
 app.use(parser.json());
 app.use(parser.urlencoded({extended:false}));
 
-const peoplesRoutes=require('./api/routes/peoples');
+const {peoplesRoutes,usersRoutes}=require('./api/routes/index');
+
 app.use('/peoples',peoplesRoutes);
 
 
