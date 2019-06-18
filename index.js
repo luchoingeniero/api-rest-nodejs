@@ -8,6 +8,9 @@ app.use(morgan('dev'));
 app.use(parser.json());
 app.use(parser.urlencoded({extended:false}));
 
+const peoplesRoutes=require('./api/routes/peoples');
+app.use('/peoples',peoplesRoutes);
+
 
 app.listen(3000,()=>{
     console.log("Servicio Iniciado!!");
