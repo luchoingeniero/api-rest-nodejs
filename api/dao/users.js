@@ -6,8 +6,8 @@ module.exports={
     listAll:()=>{ return connection.findAllTable(table);},
     findById:(id)=>{ return connection.findByIdTable(table,id);},
     findByUsername:(username)=>{return connection.findOneByColumnTable(table,"username",username); },
-    delete:(user)=>{return conn.deleteByColumn(table,"id",user.id);},
-    add:(user)=>{return conn.createByObject(table,user);},
-    update:(user)=>{ return conn.createByObject(table,user);  }
+    delete:(user)=>{return connection.deleteByColumn(table,"id",user.id);},
+    add:(user)=>{return connection.createByObject(table,user);},
+    update:(user)=>{ return connection.createByObject(table,user);  }
 
 };

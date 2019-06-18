@@ -43,11 +43,21 @@ var conn={
          .catch(reject);
       });
     },
+    findOneByContainsColumnTable:(table,column,value)=>{
+      return new Promise((resolve, reject) => {
+         conn.query("select * from "+table+" where "+column+" like '%?%'",[value])
+         .then((data)=>{resolve(data[0])})
+         .catch(reject);
+      });
+    },
     findByIdTable:(table,id)=>{
       return conn.findOneByColumnTable(table,"id",id);
     },
     findAllByColumnTable:(table,column,value)=>{
       return conn.query("select * from "+table+" where "+column+"=?",[value]);
+    },
+    findAllByContainsColumnTable:(table,column,value)=>{
+      return conn.query("select * from "+table+" where "+column+"like '%?%'",[value]);
     },
     deleteByColumn:(table,column,value)=>{
       const sql="delete * from "+table+" where "+column+"=?;";
