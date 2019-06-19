@@ -4,8 +4,9 @@ const util=require('../util/util');
 module.exports={
     login:async (user)=>{
         var result= await usersDao.findByUsername(user.username); 
-        if(!result){return false;}
-        return util.compareHash(user.password, result.password);;
+      
+        if(!result){return false; }
+        return (util.compareHash(user.password, result.password)?result:false);
       },
     listAll:usersDao.listAll,
     findById:usersDao.findById,

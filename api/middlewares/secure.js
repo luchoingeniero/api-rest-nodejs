@@ -11,19 +11,19 @@ module.exports=function (req,res,next){
         }
 
     token = token.replace('Bearer ', '');// reemplazamos el texto que le pone el navegador
+    
     var callback=(err, user)=>{
               if (err) {
                 res.status(401).send({
                   error: 'Token inválido'
                 })
               } else {
-                res.send({
-                  message: 'Autorizado!!'
-                })
+            console.log("DATA_USER",user);
+                    next();
               };
     }
     util.verifyTocken(token,callback);
     }
 
-    next();
+    
 }

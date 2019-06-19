@@ -9,7 +9,7 @@ module.exports={
             res.status(400).end();
         }else{
             var isLogin= await usersService.login(user);
-            var tokenData = {username: user.username};
+            var tokenData = {username: user.username,role:isLogin.role};
             res.send( (isLogin)?{token:util.generateTocken(tokenData)}:{error: 'usuario o contraseña inválidos'});
         }
      },
