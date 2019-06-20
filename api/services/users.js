@@ -5,7 +5,7 @@ module.exports={
     login:async (user)=>{
         var result= await usersDao.findByUsername(user.username); 
       
-        if(!result){return false; }
+        if(!result||!result.id){return false; }
         return (util.compareHash(user.password, result.password)?result:false);
       },
     listAll:usersDao.listAll,

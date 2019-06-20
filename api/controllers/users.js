@@ -8,8 +8,9 @@ module.exports={
           if(!user||!user.username||!user.password){
             res.status(400).end();
         }else{
+            console.log("USERRRR",user);
             var isLogin= await usersService.login(user);
-            var tokenData = {username: user.username,role:isLogin.role};
+            var tokenData = { id: isLogin.id, username: user.username,role:isLogin.role};
             res.send( (isLogin)?{token:util.generateTocken(tokenData)}:{error: 'usuario o contraseña inválidos'});
         }
      },
